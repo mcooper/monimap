@@ -45,7 +45,7 @@ fetch('data/gpsdata.json')
       const markerObj = L.marker([marker.latitude, marker.longitude], { icon });
       clusterGroup.addLayer(markerObj);
     }
+    myMap.addLayer(clusterGroup);
   })
 
-myMap.addLayer(clusterGroup);
 

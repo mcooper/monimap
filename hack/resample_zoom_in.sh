@@ -1,40 +1,41 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 cd ~/monimap/app/projecttiles/
 
 z=$1
-
-if [[ "$2" -eq "1" ]]; then
-  xmin=$2
-else
+if [ -z "$2" ]; then
   xmin=0
+else
+  xmin=$2
 fi
 
-if [[ "$3" -eq "1" ]]; then
-  xmax=$3
-else
+if [ -z "$3" ]; then
   xmax=$(echo "2^$z - 1" | bc)
+else
+  xmax=$3
 fi
 
-if [[ "$4" -eq "1" ]]; then
-  ymin=$4
-else
+if [ -z "$4" ]; then
   ymin=0
-fi
-
-if [[ "$5" -eq "1" ]]; then
-  ymax=$5
 else
-  ymax=$(echo "2^$z - 1" | bc)
+  ymin=$4
 fi
 
-for x in $(xmin $xmax)
+if [ -z "$5" ]; then
+  ymax=$(echo "2^$z - 1" | bc)
+else
+  ymax=$5
+fi
+
+for x in $(seq $xmin $xmax)
 do
-  for y in $(ymin $ymax)
+  mkdir -p $((z + 1))/$((x*2))
+  mkdir -p $((z + 1))/$((x*2 + 1))
+  for y in $(seq $ymin $ymax)
   do
-    convert $z/$x/$y.jpg -crop 128x128+0+0 -resize 256x256 $((z + 1))/$((xmin*2))/$((ymin*2)).jpg
-    convert $z/$x/$y.jpg -crop 128x128+128+0 -resize 256x256 $((z + 1))/$((xmin*2 + 1))/$((ymin*2)).jpg
-    convert $z/$x/$y.jpg -crop 128x128+0+128 -resize 256x256 $((z + 1))/$((xmin*2))/$((ymin*2 + 1)).jpg
-    convert $z/$x/$y.jpg -crop 128x128+128+128 -resize 256x256 $((z + 1))/$((xmin*2 + 1))/$((ymin*2 + 1)).jpg
+    convert $z/$x/$y.jpg -crop 128x128+0+0 -resize 256x256 $((z + 1))/$((x*2))/$((y*2)).jpg
+    convert $z/$x/$y.jpg -crop 128x128+128+0 -resize 256x256 $((z + 1))/$((x*2 + 1))/$((y*2)).jpg
+    convert $z/$x/$y.jpg -crop 128x128+0+128 -resize 256x256 $((z + 1))/$((x*2))/$((y*2 + 1)).jpg
+    convert $z/$x/$y.jpg -crop 128x128+128+128 -resize 256x256 $((z + 1))/$((x*2 + 1))/$((y*2 + 1)).jpg
   done
 done

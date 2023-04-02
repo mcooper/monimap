@@ -37,6 +37,7 @@ res_ymax=$((ymax/2))
 # Resample to larger tiles
 for x in $(seq $res_xmin $res_xmax)
 do
+  mkdir -p $res_z/$x
   for y in $(seq $res_ymin $res_ymax)
   do
     A=$z/$((x*2))/$((y*2)).jpg
@@ -69,3 +70,6 @@ do
       $res_z/$x/$y.jpg
   done
 done
+
+echo "New extent: $res_xmin $res_xmax $res_ymin $res_ymax"
+

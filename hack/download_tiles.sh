@@ -36,6 +36,7 @@ do
   do
     if [ -f "$z/$x/$y.jpg" ]; then
       echo "File Exists"
+      echo "$z/$x/$y.jpg" >> tiles$z
     else
       echo "$z/$x/$y.jpg" >> tiles$z
     fi
