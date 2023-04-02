@@ -5,28 +5,28 @@ cd ~/monimap/app/projecttiles/
 MAXDOWNLOADS=400
 
 z=$1
-if [[ "$2" -eq "1" ]]; then
-  xmin=$2
-else
+if [ -z "$2" ]; then
   xmin=0
+else
+  xmin=$2
 fi
 
-if [[ "$3" -eq "1" ]]; then
-  xmax=$3
-else
+if [ -z "$3" ]; then
   xmax=$(echo "2^$z - 1" | bc)
+else
+  xmax=$3
 fi
 
-if [[ "$4" -eq "1" ]]; then
-  ymin=$4
-else
+if [ -z "$4" ]; then
   ymin=0
+else
+  ymin=$4
 fi
 
-if [[ "$5" -eq "1" ]]; then
-  ymax=$5
-else
+if [ -z "$5" ]; then
   ymax=$(echo "2^$z - 1" | bc)
+else
+  ymax=$5
 fi
 
 for x in $(seq $xmin $xmax)
