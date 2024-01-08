@@ -16,6 +16,10 @@ body {
   padding: 0;
 }
 
+a {
+ text-decoration: none;
+}
+
 
 /* HTML marker styles */
 .label-tag {
@@ -37,6 +41,7 @@ body {
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid #4285F4;
+  /* border-top: 8px solid #4285F4; */
+
 }
 
